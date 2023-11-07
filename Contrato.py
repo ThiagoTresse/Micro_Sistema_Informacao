@@ -44,34 +44,50 @@ class Contrato:
         self.dados = pd.read_excel("Contratos-2023.xlsx")
                 
 
+
+
     #Método construtor de Contratos
-    def insere_novo(self, Contrato):
-        novo_contrato = {
-            numero_contrato": Contrato.numero_contrato,
-            ano_contrato": Contrato.ano_contrato,
-            tipo_contrato": Contrato.tipo_contrato,
-            processo": Contrato.processo,
-            ano_processo": Contrato.ano_processo,
-            valor_contratado": Contrato.valor_contratado,
-            aditivo": Contrato.aditivo,
-            valor_total": Contrato.valor_total,
-            cpfcnpj": Contrato.cpfcnpj,
-            fornecedor": Contrato.fornecedor,
-            secretaria": Contrato.secretaria,
-            fiscal": Contrato.fiscal,
-            data_inicio": Contrato.data_inicio,
-            data_final": Contrato.data_final,
-            data_publicacao": Contrato.data_publicacao,
-            data_assinatura": Contrato.data_assinatura,
-            situacao": Contrato.situacao,
-            coronavirus": Contrato.coronavirus,
+    def insere_novo(self, novo_contrato):
+        novo_contrato = { 
+            numero_contrato = input(int("Informe o numero do contrato: ")),
+            ano_contrato = input(int("Informe o ano do contrato: ")),
+            tipo_contrato = int(input("informe o tipo de contrato: ")) ,
+            processo = input(int("Informe o numero do proceso: ")) ,
+            ano_processo = input(int("Informe o numero do processo: ")) ,
+            valor_contratado = input(float("Informe o valor do contrato: ")) ,
+            aditivo = input(int("Informe o valor da aditivo: ")) ,
+            valor_total = input(float("Informe o valor total:")) ,
+            cpfcnpj = input(int("Informe o CPF/CNPJ: ")) ,
+            fornecedor = input(str("Informe o nome do fornecedor: ")),
+            secretaria = input(str("Informe a secretaria: ")),
+            fiscal = input(str("Informe o fiscal: ")) ,
+            data_inicio = input(datetime("informe a data de inicio: ")) ,
+            data_final = input(datetime("informe a data final: ")),
+            data_publicacao = input(datetime("Informe a data de publicação: ")) ,
+            data_assinatura = input(datetime("Informe a data de Assinatura do contrato: ")),
+            situacao = input(str("Informe a Situação: ")),
+            coronavirus = input(bool("Coronavirus ? (S/N): ")),
             objeto = input(str("Informe o obejto: "))
         }
         self.dados = self.dados.append(novo_contrato, ignore_index=True)
         self.dados.to_excel("Contratos-2023.xlsx", index=False)
-       
-
     
+
+    def excluir_contrato(self, numero_contrato, ano_contrato):
+    #Exclui um contrato da planilha a partir do numero e ano do contrato
+    mask = (self.dados['numero_contrato'] == numero_contrato) & (self.dados['ano_contrato'] == ano_contrato)
+    self.dados = self.dados[~mask]
+    self.dados.to_excel("Contratos-2023.xlsx", index=False)
+
+
+    def consultar_contrato(self, numero_contrato, ano_contrato):
+    #Retorna um DataFrame com as informações do contrato a partir do numero e ano do contrato
+    mask = (self.dados['numero_contrato'] == numero_contrato) & (self.dados['ano_contrato'] == ano_contrato)
+    return self.dados[mask]
+
+    #Retorna um DataFrame com as informações de todos os contratos
+    def listar_contratos(self):
+        return self.dados
 
 
     def alterar_atributos(cls, objeto, **kwargs):
@@ -81,81 +97,81 @@ class Contrato:
 
 
 
+    c = Contrato()
 
-c = Contrato()
+    df = c.dados
+    df[df['NumeroContrato']==588]
+    df.dtypes
 
-df = c.dados
-df[df['NumeroContrato']==588]
-df.dtypes
+    df[df['Fornecedor'].str.contains('LTDA', regex=True)]
 
-df[df['Fornecedor'].str.contains('LTDA', regex=True)]
+    df.to_excel("contratos2.xlsx")
 
-df.to_excel("contratos2.xlsx")
-
-c.dados=c.dados['NumeroContrato']==588
+    c.dados=c.dados['NumeroContrato']==588
 
 
-#Getters
+    #Getters
     def get_numero_contrato(self):
         return self.numero_contrato
-
+    
     def get_ano_contrato(self):
         return self.ano_contrato
-
+    
     def get_tipo_contrato(self):
         return self.tipo_contrato
-
+    
     def get_processo(self):
         return self.processo
-
+    
     def get_ano_processo(self):
         return self.ano_processo
-
+    
     def get_valor_contratado(self): 
         return self.valor_contratado
-
+    
     def get_aditivo(self):
         return self.aditivo
-
+    
     def get_valor_total(self):
         return self.valor_total
 
+
+        
+    
     def get_cpfcnpj(self):
         return self.cpfcnpj
-
+    
     def get_fornecedor(self):
         return self.fornecedor
-
+    
     def get_secretaria(self):
         return self.secretaria
-
+    
     def get_fiscal(self):
         return self.fiscal
-
+    
     def get_data_inicio(self):
         return self.data_inicio
-
+    
     def get_data_final(self):
         return self.data_final
-
+    
     def get_data_publicacao(self):
         return self.data_publicacao
-
+    
     def get_data_assinatura(self):
         return self.data_assinatura
-
+    
     def get_situacao(self):
         return self.situacao
-
+    
     def get_coronavirus(self):
         return self.coronavirus
-
+    
     def get_objeto(self):
         return self.objeto
-
-
-#Setters
-
+    
+    #Setters
     def set_numero_contrato(self, numero_contrato):
         self.numero_contrato = numero_contrato
 
