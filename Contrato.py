@@ -46,7 +46,7 @@ class Contrato:
 
 
 
-    #Método construtor de Contratos
+#Método construtor de Contratos
     def insere_novo(self, novo_contrato):
         novo_contrato = { 
             numero_contrato = input(int("Informe o numero do contrato: ")),
@@ -110,7 +110,7 @@ class Contrato:
     c.dados=c.dados['NumeroContrato']==588
 
 
-    #Getters
+#Getters
     def get_numero_contrato(self):
         return self.numero_contrato
     
@@ -134,9 +134,6 @@ class Contrato:
     
     def get_valor_total(self):
         return self.valor_total
-
-
-        
     
     def get_cpfcnpj(self):
         return self.cpfcnpj
@@ -171,7 +168,7 @@ class Contrato:
     def get_objeto(self):
         return self.objeto
     
-    #Setters
+#Setters
     def set_numero_contrato(self, numero_contrato):
         self.numero_contrato = numero_contrato
 
